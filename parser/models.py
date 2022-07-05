@@ -79,3 +79,9 @@ class GenerationEngine(models.Model):
     gear_type = models.CharField(choices=GearType.choices, max_length=20, verbose_name="Привод")
     transmission_type = models.CharField(choices=TransmissionType.choices, max_length=20,
                                          verbose_name="Коробка передач")
+
+
+class GenerationRegion(models.Model):
+    gen = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Поколение")
+    region = models.CharField(max_length=255, verbose_name="Регион")
+    total = models.IntegerField(verbose_name="Количество")
