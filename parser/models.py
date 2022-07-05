@@ -35,6 +35,7 @@ class CarGeneration(models.Model):
     title = models.CharField(max_length=255, verbose_name="Поколение")
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Модель")
     body_type = models.CharField(choices=BodyType.choices, max_length=25, verbose_name="Тип кузова")
+    photo_link = models.URLField(verbose_name="Ссылка на фото")
     start_year = models.IntegerField(verbose_name="Год начала производства")
     end_year = models.IntegerField(verbose_name="Год конеца производства")
     places = models.IntegerField(verbose_name="Количество мест")
