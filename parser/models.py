@@ -34,7 +34,7 @@ class CarGeneration(models.Model):
 
     title = models.CharField(max_length=255, verbose_name="Поколение")
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Модель")
-    body_type = models.CharField(choices=BodyType, max_length=25, verbose_name="Тип кузова")
+    body_type = models.CharField(choices=BodyType.choices, max_length=25, verbose_name="Тип кузова")
     start_year = models.IntegerField(verbose_name="Год начала производства")
     end_year = models.IntegerField(verbose_name="Год конеца производства")
     places = models.IntegerField(verbose_name="Количество мест")
@@ -55,7 +55,7 @@ class CarEngine(models.Model):
 
     volume = models.DecimalField(decimal_places=1, max_digits=2, verbose_name="Объём")
     power = models.IntegerField(verbose_name="Мощность л.с.")
-    oil_type = models.CharField(max_length=15, verbose_name="Тип топлива")
+    oil_type = models.CharField(choices=OilType.choices, max_length=15, verbose_name="Тип топлива")
     acceleration = models.IntegerField(verbose_name="Разгон до 100 км/ч, сек.")
 
     def __str__(self):
@@ -76,5 +76,6 @@ class GenerationEngine(models.Model):
 
     gen = models.ForeignKey(CarGeneration, on_delete=models.CASCADE, verbose_name="Поколение")
     engine = models.ForeignKey(CarEngine, on_delete=models.CASCADE, verbose_name="Двигатель")
-    gear_type = models.CharField(choices=GearType, max_length=20, verbose_name="Привод")
-    transmission_type = models.CharField(choices=TransmissionType, max_length=20, verbose_name="Коробка передач")
+    gear_type = models.CharField(choices=GearType.choices, max_length=20, verbose_name="Привод")
+    transmission_type = models.CharField(choices=TransmissionType.choices, max_length=20,
+                                         verbose_name="Коробка передач")
