@@ -1,23 +1,26 @@
 import os
-import ast
 import requests
 
-from typing import List
+from typing import List, NamedTuple
 
-BASE_LINK = "https://yastatic.net/s3/vertis-front-deploy/_autoru-frontend/client_0f2024c1745d99e834ee.js"
+from bs4 import BeautifulSoup
+
+BASE_LINK = 'https://auto.ru/catalog/cars/'
 
 
-def json_from_yastatic() -> List[str]:
+class BrandData(NamedTuple):
+    brand: str
+    link: str
+
+
+def get_car_list() -> List[NamedTuple]:
     """
-    send request to the yastatic server with js script and get from him the json in text format;
-
-    return the list of brands
+    Get the html from catalog and parse it.
+    return: the List of BrandData(brand: str, link: str)
     """
     response = requests.get(BASE_LINK, cookies={"_ym_d": str(os.getenv("_YM_D")), "_ym_uid": str(os.getenv("_YM_UID"))})
-    begin_rule = """870:e=>{"use strict";e.exports=JSON.parse('"""  # rule in begin of JSON
-    end_rule = "')},87385"  # rule in end of JSON
-    start_index: int = response.text.find(begin_rule) + len(begin_rule)
-    end_index: int = response.text.find(end_rule)
-
-    brands_model_dict = dict(ast.literal_eval(response.text[start_index: end_index]))  # from text to dict
-    return list(brands_model_dict.keys())
+    html = response.content.decode('utf-8')
+    bs = BeautifulSoup(html, "html.parser")
+    div_car_lst = bs.find("div", {"class": "search-form-v2-list_type_all"})
+    a_cars = div_car_lst.find_all("a", recursive=True)
+    return [BrandData(car.text, car.attrs['href']) for car in a_cars]
