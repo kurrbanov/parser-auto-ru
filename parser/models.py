@@ -3,6 +3,7 @@ from django.db import models
 
 class CarBrand(models.Model):
     brand = models.CharField(max_length=255, verbose_name="Марка")
+    link_auto_ru = models.URLField(verbose_name="Ссылка на auto.ru")
 
     def __str__(self):
         return f"{self.brand}"
@@ -11,6 +12,7 @@ class CarBrand(models.Model):
 class CarModel(models.Model):
     brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE, verbose_name="Марка")
     car_model = models.CharField(max_length=255, verbose_name="Модель")
+    link_auto_ru = models.URLField(verbose_name="Ссылка на auto.ru")
 
     def __str__(self):
         return f"{self.car_model}"
