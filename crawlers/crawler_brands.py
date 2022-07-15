@@ -4,7 +4,7 @@ import requests
 from typing import List
 from bs4 import BeautifulSoup
 
-from parser.data_structures import BrandData
+from crawlers.data_structures import BrandData
 
 BASE_LINK = 'https://auto.ru/catalog/cars/'
 

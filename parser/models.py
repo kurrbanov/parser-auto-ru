@@ -65,6 +65,7 @@ class CarEngine(models.Model):
         GAZ = 'GAZ', 'Газ'
         ELECTRICITY = 'ELECTRICITY', 'Электрический'
 
+    modification = models.CharField(max_length=255, verbose_name="Модификация")
     volume = models.DecimalField(decimal_places=1, max_digits=2, verbose_name="Объём")
     power = models.IntegerField(verbose_name="Мощность л.с.")
     oil_type = models.CharField(choices=OilType.choices, max_length=15, verbose_name="Тип топлива")

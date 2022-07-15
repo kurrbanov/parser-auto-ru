@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from bs4 import BeautifulSoup
 
-from parser.data_structures import BrandData, ModelData
+from crawlers.data_structures import BrandData, ModelData
 
 WORKERS = 12
 TIMEOUT = 10
