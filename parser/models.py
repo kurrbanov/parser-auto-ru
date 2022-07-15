@@ -8,6 +8,9 @@ class CarBrand(models.Model):
     def __str__(self):
         return f"{self.brand}"
 
+    class Meta:
+        db_table = 'car_brand'
+
 
 class CarModel(models.Model):
     brand = models.ForeignKey(CarBrand, on_delete=models.CASCADE, verbose_name="Марка")
@@ -16,6 +19,9 @@ class CarModel(models.Model):
 
     def __str__(self):
         return f"{self.car_model}"
+
+    class Meta:
+        db_table = 'car_model'
 
 
 class CarGeneration(models.Model):
@@ -47,6 +53,9 @@ class CarGeneration(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    class Meta:
+        db_table = 'car_generation'
+
 
 class CarEngine(models.Model):
     class OilType(models.TextChoices):
@@ -63,6 +72,9 @@ class CarEngine(models.Model):
 
     def __str__(self):
         return f"{self.volume}"
+
+    class Meta:
+        db_table = 'car_engine'
 
 
 class GenerationEngine(models.Model):
@@ -83,6 +95,9 @@ class GenerationEngine(models.Model):
     transmission_type = models.CharField(choices=TransmissionType.choices, max_length=20,
                                          verbose_name="Коробка передач")
 
+    class Meta:
+        db_table = 'generation__engine'
+
 
 class GenerationRegion(models.Model):
     gen = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Поколение")
@@ -90,6 +105,12 @@ class GenerationRegion(models.Model):
     total = models.IntegerField(verbose_name="Количество")
     average_price = models.IntegerField(verbose_name="Средняя цена в регионе")
 
+    class Meta:
+        db_table = 'generation__region'
+
 
 class Region(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название региона")
+
+    class Meta:
+        db_table = 'region'
