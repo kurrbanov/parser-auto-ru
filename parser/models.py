@@ -86,5 +86,10 @@ class GenerationEngine(models.Model):
 
 class GenerationRegion(models.Model):
     gen = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Поколение")
-    region = models.CharField(max_length=255, verbose_name="Регион")
+    region = models.ForeignKey('Region', on_delete=models.CASCADE, verbose_name="Регион")
     total = models.IntegerField(verbose_name="Количество")
+    average_price = models.IntegerField(verbose_name="Средняя цена в регионе")
+
+
+class Region(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Название региона")

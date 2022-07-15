@@ -2,14 +2,12 @@ import os
 import requests
 import logging
 
-from time import time
 from typing import List
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from bs4 import BeautifulSoup
 
 from parser.data_structures import BrandData, ModelData
-from parser.crawler_brands import get_car_list
 
 WORKERS = 12
 TIMEOUT = 10
