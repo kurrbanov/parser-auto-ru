@@ -12,7 +12,7 @@ logger = logging.getLogger("__name__")
 
 
 class Crawler:
-    workers = os.cpu_count() * 4
+    workers = os.cpu_count() * 3
     timeout = 5
 
     def __init__(self, cars: list[Union[BrandData, ModelData]]):
@@ -55,3 +55,8 @@ class Crawler:
 
     def clean_and_create(self, html):
         raise NotImplemented
+
+    def get_models(self):
+        self._executor.shutdown(wait=True)
+        if self._problem_urls:
+            self.run_sync(self._problem_urls)

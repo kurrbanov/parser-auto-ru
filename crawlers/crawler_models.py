@@ -26,10 +26,5 @@ class ModelCrawler(Crawler):
             logging.error(f"Generated an exception: {exc}")
 
     def get_models(self):
-        self._executor.shutdown(wait=True)
-        if self._problem_urls:
-            self.run_sync(self._problem_urls)
-        return self._models_lst
-
-    def get_models_sync(self):
+        super().get_models()
         return self._models_lst

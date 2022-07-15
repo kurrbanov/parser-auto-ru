@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class CarBrand(models.Model):
@@ -26,25 +27,28 @@ class CarModel(models.Model):
 
 class CarGeneration(models.Model):
     class BodyType(models.TextChoices):
-        SEDAN = 'SEDAN', 'Седан'
-        HATCHBACK_3_DOOR = 'HATCHBACK_3_DOOR', 'Хэтчбэк 3 дв.'
-        HATCHBACK_5_DOOR = 'HATCHBACK_5_DOOR', 'Хэтчбэк 5 дв.'
-        LIFTBACK = 'LIFTBACK', 'Лифтбэк'
-        ALLROAD_3_DOOR = 'ALLROAD_3_DOOR', 'Внедорожник 3 дв.'
-        ALLROAD_5_DOOR = 'ALLROAD_5_DOOR', 'Внедорожник 5 дв.'
-        WAGON = 'WAGON', 'Универсал'
-        COUPE = 'COUPE', 'Купе'
-        MINIVAN = 'MINIVAN', 'Минивэн'
-        PICKUP = 'PICKUP', 'Пикап'
-        CABRIO = 'CABRIO', 'Кабриолет'
-        VAN = 'VAN', 'Фургон'
-        LIMOUSINE = 'LIMOUSINE', 'Лимузин'
+        SEDAN = 'SEDAN', _('Седан')
+        HATCHBACK = 'HATCHBACK', _('Хэтчбек')
+        HATCHBACK_3_DOOR = 'HATCHBACK_3_DOOR', _('Хэтчбек 3 дв.')
+        HATCHBACK_5_DOOR = 'HATCHBACK_5_DOOR', _('Хэтчбек 5 дв.')
+        LIFTBACK = 'LIFTBACK', _('Лифтбек')
+        ALLROAD_3_DOOR = 'ALLROAD_3_DOOR', _('Внедорожник 3 дв.')
+        ALLROAD_5_DOOR = 'ALLROAD_5_DOOR', _('Внедорожник 5 дв.')
+        ALLROAD = 'ALLROAD', _('Внедорожник')
+        WAGON = 'WAGON', _('Универсал')
+        COUPE = 'COUPE', _('Купе')
+        MINIVAN = 'MINIVAN', _('Минивэн')
+        PICKUP = 'PICKUP', _('Пикап')
+        CABRIO = 'CABRIO', _('Кабриолет')
+        VAN = 'VAN', _('Фургон')
+        LIMOUSINE = 'LIMOUSINE', _('Лимузин')
 
     title = models.CharField(max_length=255, verbose_name="Поколение")
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Модель")
     body_type = models.CharField(choices=BodyType.choices, max_length=25, verbose_name="Тип кузова")
     photo_link = models.URLField(verbose_name="Ссылка на фото")
     auto_ru_link = models.URLField(verbose_name="Ссылка на auto.ru")
+    auto_ru_id = models.IntegerField(unique=True, verbose_name="ID поколения на auto.ru")
     start_year = models.IntegerField(verbose_name="Год начала производства")
     end_year = models.IntegerField(verbose_name="Год конеца производства")
     average_price = models.IntegerField(default=0, blank=True, verbose_name="Средняя цена, руб.")
@@ -59,11 +63,11 @@ class CarGeneration(models.Model):
 
 class CarEngine(models.Model):
     class OilType(models.TextChoices):
-        PETROL = 'PETROL', 'Бензин'
-        DIESEL = 'DIESEL', 'Дизель'
-        HYBRID = 'HYBRID', 'Гибрид'
-        GAZ = 'GAZ', 'Газ'
-        ELECTRICITY = 'ELECTRICITY', 'Электрический'
+        PETROL = 'PETROL', _('Бензин')
+        DIESEL = 'DIESEL', _('Дизель')
+        HYBRID = 'HYBRID', _('Гибрид')
+        GAZ = 'GAZ', _('Газ')
+        ELECTRICITY = 'ELECTRICITY', _('Электрический')
 
     modification = models.CharField(max_length=255, verbose_name="Модификация")
     volume = models.DecimalField(decimal_places=1, max_digits=2, verbose_name="Объём")
@@ -80,15 +84,15 @@ class CarEngine(models.Model):
 
 class GenerationEngine(models.Model):
     class GearType(models.TextChoices):
-        FORWARD_CONTROL = 'FORWARD_CONTROL', 'Передний'
-        REAR_DRIVE = 'REAR_DRIVE', 'Задний'
-        ALL_WHEEL_DRIVE = 'ALL_WHEEL_DRIVE', 'Полный'
+        FORWARD_CONTROL = 'FORWARD_CONTROL', _('Передний')
+        REAR_DRIVE = 'REAR_DRIVE', _('Задний')
+        ALL_WHEEL_DRIVE = 'ALL_WHEEL_DRIVE', _('Полный')
 
     class TransmissionType(models.TextChoices):
-        AMT = 'AMT', 'Роботизированная'
-        AV = 'AV', 'Автоматическая'
-        CVT = 'CVT', 'Вариатор'
-        MT = 'MT', 'Механическая'
+        AMT = 'AMT', _('Роботизированная')
+        AV = 'AV', _('Автоматическая')
+        CVT = 'CVT', _('Вариатор')
+        MT = 'MT', _('Механическая')
 
     gen = models.ForeignKey(CarGeneration, on_delete=models.CASCADE, verbose_name="Поколение")
     engine = models.ForeignKey(CarEngine, on_delete=models.CASCADE, verbose_name="Двигатель")

@@ -18,6 +18,7 @@ class GenerationData(NamedTuple):
     generation: str
     body_type: str
     link: str
+    id: int
     photo_url: str
     start_year: int
     end_year: int
