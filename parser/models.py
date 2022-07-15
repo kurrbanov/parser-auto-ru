@@ -44,9 +44,9 @@ class CarGeneration(models.Model):
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE, verbose_name="Модель")
     body_type = models.CharField(choices=BodyType.choices, max_length=25, verbose_name="Тип кузова")
     photo_link = models.URLField(verbose_name="Ссылка на фото")
+    auto_ru_link = models.URLField(verbose_name="Ссылка на auto.ru")
     start_year = models.IntegerField(verbose_name="Год начала производства")
     end_year = models.IntegerField(verbose_name="Год конеца производства")
-    places = models.IntegerField(verbose_name="Количество мест")
     average_price = models.IntegerField(default=0, blank=True, verbose_name="Средняя цена, руб.")
     total = models.IntegerField(default=0, blank=True, verbose_name='Всего на рынке')
 
