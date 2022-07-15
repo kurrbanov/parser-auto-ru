@@ -53,8 +53,11 @@ class ModelCrawler:
 
     def run_sync(self, urls_list):
         for url in urls_list:
-            html = self.retrieve_brands(url)
-            self.clean_and_create(html)
+            try:
+                html = self.retrieve_brands(url)
+                self.clean_and_create(html)
+            except Exception as exc:
+                logging.error(f"Generated an exception: {exc} on url: {url}")
 
     def clean_and_create(self, html):
         bs = BeautifulSoup(html, "lxml")
