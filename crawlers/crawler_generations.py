@@ -39,7 +39,9 @@ class GenCrawler(Crawler):
                                                      body_type=body_type,
                                                      link=link,
                                                      id=int(link.split('/')[-3]),
-                                                     photo_url=photo_url))
+                                                     photo_url=photo_url,
+                                                     average_price=None,
+                                                     total=None))
             except (AttributeError, Exception) as exc:
                 logging.error(f"Generated exception: {exc}")
 

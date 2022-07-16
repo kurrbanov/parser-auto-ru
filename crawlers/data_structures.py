@@ -1,4 +1,5 @@
-from typing import NamedTuple
+from dataclasses import dataclass
+from typing import NamedTuple, Union
 
 
 class BrandData(NamedTuple):
@@ -12,7 +13,8 @@ class ModelData(NamedTuple):
     link: str
 
 
-class GenerationData(NamedTuple):
+@dataclass
+class GenerationData:
     brand: str
     model: str
     generation: str
@@ -22,3 +24,5 @@ class GenerationData(NamedTuple):
     photo_url: str
     start_year: int
     end_year: int
+    average_price: Union[None, int]
+    total: Union[None, int]
