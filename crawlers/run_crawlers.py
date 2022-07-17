@@ -15,7 +15,7 @@ django.setup()
 from parser.models import CarBrand, CarModel, CarGeneration
 
 if __name__ == '__main__':
-    brands = [BrandData(brand='BMW', link='https://auto.ru/catalog/cars/bmw/')
+    brands = [BrandData(brand='BMW', link='https://auto.ru/catalog/cars/bmw/'),
               BrandData(brand='Audi', link='https://auto.ru/catalog/cars/audi/'),
               BrandData(brand='Porsche', link='https://auto.ru/catalog/cars/porsche/'),
               BrandData(brand='Mercedes', link='https://auto.ru/catalog/cars/mercedes/'),
