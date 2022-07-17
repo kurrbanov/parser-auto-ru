@@ -1,14 +1,16 @@
 from dataclasses import dataclass
-from typing import NamedTuple, Union
+from typing import Union
 
 
-class BrandData(NamedTuple):
+@dataclass
+class BrandData:
     brand: str
     link: str
 
 
-class ModelData(NamedTuple):
-    brand: str
+@dataclass
+class ModelData:
+    brand: Union[str, int]
     model: str
     link: str
 
@@ -16,7 +18,7 @@ class ModelData(NamedTuple):
 @dataclass
 class GenerationData:
     brand: str
-    model: str
+    model: Union[str, int]
     generation: str
     body_type: str
     link: str

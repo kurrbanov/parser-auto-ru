@@ -7,16 +7,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from bs4 import BeautifulSoup
 
-from crawlers.data_structures import GenerationData, BrandData
-from crawlers.crawler_models import ModelCrawler
-from crawlers.crawler_generations import GenCrawler
+from crawlers.data_structures import GenerationData
 
-"""
-base_link + brand + model + gen_id + /all/ + (?body_type_group) | (body-...)
-внедорожники: body-allroad
-хэтчи: ?body_type_group=hatchback&?body_type_group=hatchback...
-?body_type_group=LIFTBACK
-"""
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
 django.setup()
 
