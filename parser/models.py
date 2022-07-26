@@ -131,7 +131,7 @@ class CarGeneration(models.Model):
         return True
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.car_model.brand} {self.car_model} {self.title} ({self.start_year} - {self.end_year})"
 
     class Meta:
         db_table = 'car_generation'
